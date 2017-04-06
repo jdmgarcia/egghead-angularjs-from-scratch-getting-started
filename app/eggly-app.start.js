@@ -20,5 +20,88 @@ angular.module('Eggly', [
         {"id": 7, "title": "Wimp", "url": "http://wimp.com", "category": "Humor" },
         {"id": 8, "title": "Dump", "url": "http://dump.com", "category": "Humor" }
     ];
+
+    $scope.currentCategory = null;
+
+    function setCurrentCategory(category) {
+        $scope.currentCategory = category;
+
+        cancelCreating();
+        cancelEditing();
+    }
+
+    function isCurrentCategory(category) {
+        return $scope.currentCategory !== null && $scope.currentCategory.name === category.name;
+    }
+
+    $scope.setCurrentCategory = setCurrentCategory;
+    $scope.isCurrentCategory = isCurrentCategory;
+
+    // ---------------------------------------------------------------------------------------------
+    // CREATING AND EDITING STATES
+    // ---------------------------------------------------------------------------------------------
+
+    $scope.isCreating = false;
+    $scope.isEditing = false;
+
+    function startCreating() {
+        $scope.isCreating = true;
+        $scope.isEditing = false;
+    }
+
+    function cancelCreating() {
+        $scope.isCreating = false;
+    }
+
+    function startEditing() {
+        $scope.isCreating = false;
+        $scope.isEditing = true;
+    }
+
+    function cancelEditing() {
+        $scope.isEditing = false;
+    }
+
+    function shouldShowCreating() {
+        return $scope.currentCategory && !$scope.isEditing;
+    }
+
+    function shouldShowEditing() {
+        return $scope.isEditing && !$scope.isCreating;
+    }
+
+    $scope.startCreating = startCreating;
+    $scope.cancelCreating = cancelCreating;
+    $scope.startEditing = startEditing;
+    $scope.cancelEditing = cancelEditing;
+    $scope.shouldShowCreating = shouldShowCreating;
+    $scope.shouldShowEditing = shouldShowEditing;
+
 })
 ;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
